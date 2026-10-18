@@ -1,0 +1,463 @@
+<title>CCAF Learning Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+  /* Layout: radial knowledge map centered on the 4D Framework */
+  :root {
+    --bg: #1a1a2e;
+    --bg-surface: #16213e;
+    --text: #e8e8e8;
+    --text-muted: #8a8fa8;
+    --accent-core: #e2b44f;
+    --accent-foundations: #4a9ead;
+    --accent-claude: #c96b54;
+    --line: rgba(226, 180, 79, 0.15);
+    --line-active: rgba(226, 180, 79, 0.4);
+    --glow: rgba(226, 180, 79, 0.08);
+    color-scheme: dark;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f5f2eb;
+      --bg-surface: #ebe7de;
+      --text: #2a2a2e;
+      --text-muted: #6b6b78;
+      --accent-core: #b8872a;
+      --accent-foundations: #2e7a87;
+      --accent-claude: #a8503c;
+      --line: rgba(184, 135, 42, 0.15);
+      --line-active: rgba(184, 135, 42, 0.35);
+      --glow: rgba(184, 135, 42, 0.06);
+      color-scheme: light;
+    }
+  }
+
+  :root[data-theme="light"] {
+    --bg: #f5f2eb;
+    --bg-surface: #ebe7de;
+    --text: #2a2a2e;
+    --text-muted: #6b6b78;
+    --accent-core: #b8872a;
+    --accent-foundations: #2e7a87;
+    --accent-claude: #a8503c;
+    --line: rgba(184, 135, 42, 0.15);
+    --line-active: rgba(184, 135, 42, 0.35);
+    --glow: rgba(184, 135, 42, 0.06);
+    color-scheme: light;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap');
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    margin: 0;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .page {
+    max-width: 1100px;
+    width: 100%;
+    padding-block: 48px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .header h1 {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--accent-core);
+    margin: 0 0 8px;
+    text-wrap: balance;
+  }
+
+  .header p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .header .badge {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-core);
+    border: 1px solid var(--accent-core);
+    border-radius: 3px;
+    padding: 3px 10px;
+    margin-bottom: 16px;
+  }
+
+  .map {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  @media (max-width: 740px) {
+    .map {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+
+  /* Center column — the 4D core */
+  .core {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding-top: 20px;
+  }
+
+  .core-ring {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-core);
+    background: var(--glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    box-shadow: 0 0 40px var(--glow), inset 0 0 30px var(--glow);
+  }
+
+  .core-ring .label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .core-ring .title {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-core);
+    line-height: 1.2;
+  }
+
+  .d-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    width: 200px;
+  }
+
+  .d-item {
+    background: var(--bg-surface);
+    border: 1px solid var(--line-active);
+    border-radius: 4px;
+    padding: 8px 10px;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--accent-core);
+    letter-spacing: 0.04em;
+  }
+
+  /* Course columns */
+  .course {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .course-header {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .course-header.foundations {
+    color: var(--accent-foundations);
+    border: 1px solid var(--accent-foundations);
+  }
+
+  .course-header.claude101 {
+    color: var(--accent-claude);
+    border: 1px solid var(--accent-claude);
+  }
+
+  .topic {
+    background: var(--bg-surface);
+    border-left: 3px solid transparent;
+    border-radius: 2px;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: var(--text);
+    transition: border-color 0.2s;
+  }
+
+  .topic:hover {
+    border-left-color: var(--line-active);
+  }
+
+  .topic.foundations {
+    border-left-color: var(--accent-foundations);
+  }
+
+  .topic.claude101 {
+    border-left-color: var(--accent-claude);
+  }
+
+  .topic .topic-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .topic .topic-name {
+    font-weight: 500;
+  }
+
+  .topic .connects {
+    font-size: 0.7rem;
+    color: var(--accent-core);
+    margin-top: 3px;
+    font-style: italic;
+  }
+
+  /* Connections strip */
+  .connections {
+    margin-top: 48px;
+    border-top: 1px solid var(--line);
+    padding-top: 32px;
+  }
+
+  .connections h2 {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 16px;
+    text-align: center;
+  }
+
+  .conn-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+  }
+
+  .conn-item {
+    background: var(--bg-surface);
+    border-radius: 4px;
+    padding: 14px 16px;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--text);
+    border-left: 3px solid var(--accent-core);
+  }
+
+  .conn-item strong {
+    color: var(--accent-core);
+  }
+
+  .footer {
+    margin-top: 48px;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding-bottom: 24px;
+  }
+
+  .footer .progress {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 12px;
+  }
+
+  .footer .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1.5px solid var(--text-muted);
+  }
+
+  .footer .dot.done {
+    background: var(--accent-core);
+    border-color: var(--accent-core);
+  }
+
+  .footer .dot.next {
+    border-color: var(--accent-core);
+  }
+</style>
+
+<div class="page">
+  <div class="header">
+    <div class="badge">CCAF Learning Path</div>
+    <h1>The Map So Far</h1>
+    <p>Two courses completed. Every road leads back to the 4D Framework.</p>
+  </div>
+
+  <div class="map">
+    <!-- Left column: AI Foundations -->
+    <div class="course">
+      <div class="course-header foundations">AI Foundations</div>
+      <div class="topic foundations">
+        <div class="topic-label">Foundation</div>
+        <div class="topic-name">Why AI Fluency</div>
+        <div class="connects">Three engagement modes: Automation, Augmentation, Agency</div>
+      </div>
+      <div class="topic foundations">
+        <div class="topic-label">Foundation</div>
+        <div class="topic-name">How Generative AI Works</div>
+        <div class="connects">Transformers, pre-training, fine-tuning, limitations</div>
+      </div>
+      <div class="topic foundations">
+        <div class="topic-label">Deep Dive</div>
+        <div class="topic-name">Delegation</div>
+        <div class="connects">Problem Awareness + Platform Awareness + Task Delegation</div>
+      </div>
+      <div class="topic foundations">
+        <div class="topic-label">Deep Dive</div>
+        <div class="topic-name">Description</div>
+        <div class="connects">Product + Process + Performance Description</div>
+      </div>
+      <div class="topic foundations">
+        <div class="topic-label">Technique</div>
+        <div class="topic-name">Effective Prompting</div>
+        <div class="connects">6 foundational techniques</div>
+      </div>
+      <div class="topic foundations">
+        <div class="topic-label">Deep Dive</div>
+        <div class="topic-name">Discernment</div>
+        <div class="connects">Product + Process + Performance Discernment</div>
+      </div>
+      <div class="topic foundations">
+        <div class="topic-label">Deep Dive</div>
+        <div class="topic-name">Diligence</div>
+        <div class="connects">Creation + Transparency + Deployment Diligence</div>
+      </div>
+    </div>
+
+    <!-- Center: 4D Framework core -->
+    <div class="core">
+      <div class="core-ring">
+        <div class="label">City Center</div>
+        <div class="title">4D<br>Framework</div>
+      </div>
+      <div class="d-grid">
+        <div class="d-item">Delegation</div>
+        <div class="d-item">Description</div>
+        <div class="d-item">Discernment</div>
+        <div class="d-item">Diligence</div>
+      </div>
+    </div>
+
+    <!-- Right column: Claude 101 -->
+    <div class="course">
+      <div class="course-header claude101">Claude 101</div>
+      <div class="topic claude101">
+        <div class="topic-label">Description</div>
+        <div class="topic-name">Prompting & Iteration</div>
+        <div class="connects">Setting the stage, defining the task, specifying rules</div>
+      </div>
+      <div class="topic claude101">
+        <div class="topic-label">Discernment</div>
+        <div class="topic-name">Common Challenges & Evals</div>
+        <div class="connects">Every challenge traces to a Description or Discernment gap</div>
+      </div>
+      <div class="topic claude101">
+        <div class="topic-label">Delegation</div>
+        <div class="topic-name">Chat / Cowork / Code</div>
+        <div class="connects">Platform Awareness: choosing the right mode for the work</div>
+      </div>
+      <div class="topic claude101">
+        <div class="topic-label">Description</div>
+        <div class="topic-name">Projects & Skills</div>
+        <div class="connects">Projects store knowledge. Skills perform tasks.</div>
+      </div>
+      <div class="topic claude101">
+        <div class="topic-label">Description</div>
+        <div class="topic-name">Artifacts</div>
+        <div class="connects">Standalone outputs: finished deliverables to starting points</div>
+      </div>
+      <div class="topic claude101">
+        <div class="topic-label">Delegation + Diligence</div>
+        <div class="topic-name">Connectors & MCP</div>
+        <div class="connects">USB-C for AI: more access, more responsibility</div>
+      </div>
+      <div class="topic claude101">
+        <div class="topic-label">Delegation + Discernment</div>
+        <div class="topic-name">Research & Enterprise Search</div>
+        <div class="connects">Agentic investigation: delegate more, discern harder</div>
+      </div>
+      <div class="topic claude101">
+        <div class="topic-label">Surfaces</div>
+        <div class="topic-name">Claude Everywhere</div>
+        <div class="connects">Code, Slack, Design, M365, Chrome — one intelligence, many surfaces</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="connections">
+    <h2>Roads Between the Courses</h2>
+    <div class="conn-grid">
+      <div class="conn-item">
+        <strong>Prompt framework</strong> in Claude 101 is the 4D Description competency applied to a specific tool
+      </div>
+      <div class="conn-item">
+        <strong>Common challenges</strong> all trace back to the same 4D gaps — generic responses are Description failures, blind trust is Discernment failure
+      </div>
+      <div class="conn-item">
+        <strong>Projects = persistent Description.</strong> Skills = codified Description. Memory/Styles = user-level Description. Same principle at three scales.
+      </div>
+      <div class="conn-item">
+        <strong>Connectors are Delegation multipliers</strong> that raise the Diligence bar. More access to your data means more responsibility for how it's used.
+      </div>
+      <div class="conn-item">
+        <strong>Research mode is Delegation at its fullest</strong> — but the more you delegate, the more your Discernment skills matter.
+      </div>
+      <div class="conn-item">
+        <strong>The tools change. The framework stays.</strong> AI Fluency is tool-agnostic. Claude 101 proved it — every feature maps back to the same four competencies.
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    CCAF Certification Progress
+    <div class="progress">
+      <div class="dot done" title="AI Foundations"></div>
+      <div class="dot done" title="Claude 101"></div>
+      <div class="dot next" title="Claude Code 101"></div>
+    </div>
+  </div>
+</div>
