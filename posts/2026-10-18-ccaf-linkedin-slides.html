@@ -1,0 +1,582 @@
+<title>CCAF Learning Journey</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap');
+
+  :root {
+    --bg: #0f0f1a;
+    --bg-surface: #171728;
+    --bg-node: #1e1e35;
+    --text: #e4e4ec;
+    --text-muted: #7a7a96;
+    --gold: #d4a843;
+    --gold-dim: rgba(212, 168, 67, 0.12);
+    --gold-line: rgba(212, 168, 67, 0.25);
+    --accent-foundations: #4e9aab;
+    --accent-claude: #c96b54;
+    --delegation: #4e9aab;
+    --delegation-dim: rgba(78, 154, 171, 0.1);
+    --description: #8b6bbf;
+    --description-dim: rgba(139, 107, 191, 0.1);
+    --discernment: #c96b54;
+    --discernment-dim: rgba(201, 107, 84, 0.1);
+    --diligence: #5aab6e;
+    --diligence-dim: rgba(90, 171, 110, 0.1);
+    --pillar-effective: #6b9fd4;
+    --pillar-efficient: #d4a843;
+    --pillar-ethical: #9b6bbf;
+    --pillar-safe: #5aab6e;
+    --glow: rgba(212, 168, 67, 0.08);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Each slide is a standalone page */
+  .slide {
+    width: 1080px;
+    min-height: 1080px;
+    margin: 0 auto;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    page-break-after: always;
+    position: relative;
+  }
+
+  .slide:last-child {
+    page-break-after: avoid;
+  }
+
+  @media print {
+    body { background: #0f0f1a; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .slide { width: 100%; min-height: 100vh; padding: 40px; }
+    .no-print { display: none; }
+  }
+
+  /* ===== SLIDE 1: Title + Learning Map ===== */
+  .s1-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .s1-header .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-line);
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 3px;
+    margin-bottom: 16px;
+  }
+
+  .s1-header h1 {
+    font-family: 'Space Mono', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin: 0 0 10px;
+    letter-spacing: -0.02em;
+  }
+
+  .s1-header p {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Map layout */
+  .map-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 28px;
+    flex: 1;
+    align-items: start;
+  }
+
+  .course-col {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .course-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+
+  .course-label.af { color: var(--accent-foundations); border: 1px solid var(--accent-foundations); }
+  .course-label.c1 { color: var(--accent-claude); border: 1px solid var(--accent-claude); }
+
+  .topic-item {
+    background: var(--bg-surface);
+    border-radius: 3px;
+    padding: 8px 12px;
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  .topic-item.af { border-left: 3px solid var(--accent-foundations); }
+  .topic-item.c1 { border-left: 3px solid var(--accent-claude); }
+
+  .topic-item .t-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .topic-item .t-name { font-weight: 500; }
+
+  .topic-item .t-note {
+    font-size: 0.68rem;
+    color: var(--gold);
+    margin-top: 2px;
+    font-style: italic;
+  }
+
+  /* Center core */
+  .center-core {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding-top: 30px;
+  }
+
+  .core-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    background: var(--gold-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0 0 50px var(--glow);
+  }
+
+  .core-circle .cc-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .core-circle .cc-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .d-mini-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    width: 170px;
+  }
+
+  .d-mini {
+    background: var(--bg-surface);
+    border: 1px solid var(--gold-line);
+    border-radius: 3px;
+    padding: 6px 8px;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .s1-footer {
+    text-align: center;
+    margin-top: 28px;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+
+  .progress-dots {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .pdot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1.5px solid var(--text-muted);
+  }
+
+  .pdot.done { background: var(--gold); border-color: var(--gold); }
+  .pdot.next { border-color: var(--gold); }
+
+  /* ===== SLIDE 2: 4D Framework Map ===== */
+  .s2-header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .s2-header .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-line);
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 3px;
+    margin-bottom: 14px;
+  }
+
+  .s2-header h1 {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin: 0 0 8px;
+  }
+
+  .s2-header p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Pillars row */
+  .pillars-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .pill {
+    text-align: center;
+    padding: 10px 6px;
+    background: var(--bg-surface);
+    border-radius: 3px;
+    border-bottom: 3px solid transparent;
+  }
+
+  .pill .pill-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 3px;
+  }
+
+  .pill .pill-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .pill.p-eff { border-bottom-color: var(--pillar-effective); }
+  .pill.p-eff .pill-name { color: var(--pillar-effective); }
+  .pill.p-efn { border-bottom-color: var(--pillar-efficient); }
+  .pill.p-efn .pill-name { color: var(--pillar-efficient); }
+  .pill.p-eth { border-bottom-color: var(--pillar-ethical); }
+  .pill.p-eth .pill-name { color: var(--pillar-ethical); }
+  .pill.p-saf { border-bottom-color: var(--pillar-safe); }
+  .pill.p-saf .pill-name { color: var(--pillar-safe); }
+
+  .pillars-note {
+    text-align: center;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+
+  /* Quadrants compact */
+  .quads {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    flex: 1;
+  }
+
+  .quad {
+    border-radius: 5px;
+    padding: 16px;
+    border: 1px solid transparent;
+  }
+
+  .quad.q-del { background: var(--delegation-dim); border-color: var(--delegation); }
+  .quad.q-des { background: var(--description-dim); border-color: var(--description); }
+  .quad.q-dis { background: var(--discernment-dim); border-color: var(--discernment); }
+  .quad.q-dil { background: var(--diligence-dim); border-color: var(--diligence); }
+
+  .quad .qh {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .quad .qi {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--bg);
+    flex-shrink: 0;
+  }
+
+  .q-del .qi { background: var(--delegation); }
+  .q-des .qi { background: var(--description); }
+  .q-dis .qi { background: var(--discernment); }
+  .q-dil .qi { background: var(--diligence); }
+
+  .quad .qt {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .q-del .qt { color: var(--delegation); }
+  .q-des .qt { color: var(--description); }
+  .q-dis .qt { color: var(--discernment); }
+  .q-dil .qt { color: var(--diligence); }
+
+  .quad .qq {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+
+  .b-item {
+    background: var(--bg-node);
+    border-radius: 2px;
+    padding: 5px 9px;
+    font-size: 0.68rem;
+    line-height: 1.35;
+    margin-bottom: 3px;
+    display: flex;
+    gap: 6px;
+    align-items: baseline;
+  }
+
+  .b-item .src {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.45rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    padding: 1px 4px;
+    border-radius: 2px;
+    font-weight: 700;
+  }
+
+  .src.s-af { color: var(--accent-foundations); border: 1px solid var(--accent-foundations); }
+  .src.s-c1 { color: var(--accent-claude); border: 1px solid var(--accent-claude); }
+  .src.s-ex { color: var(--gold); border: 1px solid var(--gold); }
+
+  .quad .serves-row {
+    display: flex;
+    gap: 5px;
+    margin-top: 8px;
+  }
+
+  .stag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.45rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 2px;
+    border: 1px solid var(--gold-line);
+    color: var(--text-muted);
+  }
+
+  .s2-footer {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--gold-line);
+  }
+
+  .s2-footer p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin: 0 0 4px;
+  }
+
+  .s2-footer .teaser {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 12px;
+  }
+
+  /* Print hint */
+  .print-hint {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-family: 'Space Mono', monospace;
+  }
+</style>
+
+<!-- SLIDE 1: The Learning Map -->
+<div class="slide">
+  <div class="s1-header">
+    <div class="tag">CCAF Learning Path</div>
+    <h1>The Map So Far</h1>
+    <p>Two courses completed. Every road leads back to the 4D Framework.</p>
+  </div>
+
+  <div class="map-grid">
+    <div class="course-col">
+      <div class="course-label af">AI Foundations</div>
+      <div class="topic-item af"><div class="t-label">Foundation</div><div class="t-name">Why AI Fluency</div><div class="t-note">Automation, Augmentation, Agency</div></div>
+      <div class="topic-item af"><div class="t-label">Foundation</div><div class="t-name">How Generative AI Works</div><div class="t-note">Transformers, training, limitations</div></div>
+      <div class="topic-item af"><div class="t-label">Deep Dive</div><div class="t-name">Delegation</div><div class="t-note">Problem + Platform + Task Awareness</div></div>
+      <div class="topic-item af"><div class="t-label">Deep Dive</div><div class="t-name">Description</div><div class="t-note">Product + Process + Performance</div></div>
+      <div class="topic-item af"><div class="t-label">Technique</div><div class="t-name">Effective Prompting</div><div class="t-note">6 foundational techniques</div></div>
+      <div class="topic-item af"><div class="t-label">Deep Dive</div><div class="t-name">Discernment</div><div class="t-note">Evaluate, don't just accept</div></div>
+      <div class="topic-item af"><div class="t-label">Deep Dive</div><div class="t-name">Diligence</div><div class="t-note">Creation + Transparency + Deployment</div></div>
+    </div>
+
+    <div class="center-core">
+      <div class="core-circle">
+        <div class="cc-label">City Center</div>
+        <div class="cc-title">4D</div>
+      </div>
+      <div class="d-mini-grid">
+        <div class="d-mini">Delegation</div>
+        <div class="d-mini">Description</div>
+        <div class="d-mini">Discernment</div>
+        <div class="d-mini">Diligence</div>
+      </div>
+    </div>
+
+    <div class="course-col">
+      <div class="course-label c1">Claude 101</div>
+      <div class="topic-item c1"><div class="t-label">Description</div><div class="t-name">Prompting & Iteration</div><div class="t-note">Stage, task, rules</div></div>
+      <div class="topic-item c1"><div class="t-label">Discernment</div><div class="t-name">Challenges & Evals</div><div class="t-note">Systematic quality checks</div></div>
+      <div class="topic-item c1"><div class="t-label">Delegation</div><div class="t-name">Chat / Cowork / Code</div><div class="t-note">Right mode for the work</div></div>
+      <div class="topic-item c1"><div class="t-label">Description</div><div class="t-name">Projects & Skills</div><div class="t-note">Knowledge vs. process</div></div>
+      <div class="topic-item c1"><div class="t-label">Description</div><div class="t-name">Artifacts</div><div class="t-note">Outputs to starting points</div></div>
+      <div class="topic-item c1"><div class="t-label">Delegation + Diligence</div><div class="t-name">Connectors & MCP</div><div class="t-note">More access, more responsibility</div></div>
+      <div class="topic-item c1"><div class="t-label">Delegation</div><div class="t-name">Research & Enterprise</div><div class="t-note">Delegate investigations</div></div>
+      <div class="topic-item c1"><div class="t-label">Surfaces</div><div class="t-name">Claude Everywhere</div><div class="t-note">One intelligence, many surfaces</div></div>
+    </div>
+  </div>
+
+  <div class="s1-footer">
+    CCAF Certification Progress
+    <div class="progress-dots">
+      <div class="pdot done"></div>
+      <div class="pdot done"></div>
+      <div class="pdot next"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2: 4D Framework Deep Map -->
+<div class="slide">
+  <div class="s2-header">
+    <div class="tag">Mental Model</div>
+    <h1>Everything Leads to 4D</h1>
+    <p>Every topic maps back to four competencies, serving four goals.</p>
+  </div>
+
+  <div class="pillars-row">
+    <div class="pill p-eff"><div class="pill-label">Goal</div><div class="pill-name">Effective</div></div>
+    <div class="pill p-efn"><div class="pill-label">Goal</div><div class="pill-name">Efficient</div></div>
+    <div class="pill p-eth"><div class="pill-label">Goal</div><div class="pill-name">Ethical</div></div>
+    <div class="pill p-saf"><div class="pill-label">Goal</div><div class="pill-name">Safe</div></div>
+  </div>
+  <div class="pillars-note">AI Fluency: collaborate with AI in ways that are effective, efficient, ethical, and safe</div>
+
+  <div class="quads">
+    <div class="quad q-del">
+      <div class="qh"><div class="qi">D1</div><div class="qt">Delegation</div></div>
+      <div class="qq">What work should I do vs. what should AI do?</div>
+      <div class="b-item"><span class="src s-af">AF</span> Problem, Platform, Task Awareness</div>
+      <div class="b-item"><span class="src s-c1">C1</span> Chat / Cowork / Code — right mode for the job</div>
+      <div class="b-item"><span class="src s-c1">C1</span> Connectors — multiply what you can delegate</div>
+      <div class="b-item"><span class="src s-c1">C1</span> Research — delegate entire investigations</div>
+      <div class="b-item"><span class="src s-ex">EXP</span> Delegated thinking, not just tasks</div>
+      <div class="serves-row"><span class="stag">Effective</span><span class="stag">Efficient</span></div>
+    </div>
+
+    <div class="quad q-des">
+      <div class="qh"><div class="qi">D2</div><div class="qt">Description</div></div>
+      <div class="qq">How do I communicate clearly with AI?</div>
+      <div class="b-item"><span class="src s-af">AF</span> Product, Process, Performance Description</div>
+      <div class="b-item"><span class="src s-af">AF</span> 6 Prompting Techniques</div>
+      <div class="b-item"><span class="src s-c1">C1</span> Memory / Styles — user-level persistence</div>
+      <div class="b-item"><span class="src s-c1">C1</span> Projects — work-stream-level persistence</div>
+      <div class="b-item"><span class="src s-c1">C1</span> Skills — methodology-level codification</div>
+      <div class="b-item"><span class="src s-ex">EXP</span> Lacked context; AI couldn't focus</div>
+      <div class="serves-row"><span class="stag">Effective</span><span class="stag">Efficient</span></div>
+    </div>
+
+    <div class="quad q-dis">
+      <div class="qh"><div class="qi">D3</div><div class="qt">Discernment</div></div>
+      <div class="qq">Is what AI produced actually good?</div>
+      <div class="b-item"><span class="src s-af">AF</span> Product, Process, Performance Discernment</div>
+      <div class="b-item"><span class="src s-af">AF</span> Description-Discernment Loop</div>
+      <div class="b-item"><span class="src s-c1">C1</span> Iteration Mindset — refine, don't accept</div>
+      <div class="b-item"><span class="src s-c1">C1</span> Evals — systematic quality testing</div>
+      <div class="b-item"><span class="src s-c1">C1</span> Hallucination — the non-Description problem</div>
+      <div class="b-item"><span class="src s-ex">EXP</span> Blindly accepted AI plans</div>
+      <div class="serves-row"><span class="stag">Effective</span><span class="stag">Safe</span></div>
+    </div>
+
+    <div class="quad q-dil">
+      <div class="qh"><div class="qi">D4</div><div class="qt">Diligence</div></div>
+      <div class="qq">Am I using AI responsibly?</div>
+      <div class="b-item"><span class="src s-af">AF</span> Creation, Transparency, Deployment</div>
+      <div class="b-item"><span class="src s-c1">C1</span> Connector permissions — scoped access</div>
+      <div class="b-item"><span class="src s-c1">C1</span> Chrome guardrails — safety by design</div>
+      <div class="b-item"><span class="src s-c1">C1</span> Skills security — trust before install</div>
+      <div class="b-item"><span class="src s-ex">EXP</span> Accountable regardless of AI involvement</div>
+      <div class="serves-row"><span class="stag">Ethical</span><span class="stag">Safe</span></div>
+    </div>
+  </div>
+
+  <div class="s2-footer">
+    <p>The tools will keep changing. The framework stays.</p>
+    <div class="teaser">Map is expanding. More territory to unlock.</div>
+  </div>
+</div>
+
+<div class="print-hint no-print">Ctrl+P to save as PDF for LinkedIn</div>
