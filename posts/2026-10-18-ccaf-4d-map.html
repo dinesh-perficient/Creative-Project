@@ -1,0 +1,598 @@
+<title>4D Framework Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+  /* Layout: radial 4D map with foundation pillars and branching topics */
+  :root {
+    --bg: #0f0f1a;
+    --bg-surface: #171728;
+    --bg-node: #1e1e35;
+    --text: #e4e4ec;
+    --text-muted: #7a7a96;
+    --gold: #d4a843;
+    --gold-dim: rgba(212, 168, 67, 0.12);
+    --gold-line: rgba(212, 168, 67, 0.25);
+    --delegation: #4e9aab;
+    --delegation-dim: rgba(78, 154, 171, 0.1);
+    --description: #8b6bbf;
+    --description-dim: rgba(139, 107, 191, 0.1);
+    --discernment: #c96b54;
+    --discernment-dim: rgba(201, 107, 84, 0.1);
+    --diligence: #5aab6e;
+    --diligence-dim: rgba(90, 171, 110, 0.1);
+    --pillar-effective: #6b9fd4;
+    --pillar-efficient: #d4a843;
+    --pillar-ethical: #9b6bbf;
+    --pillar-safe: #5aab6e;
+    color-scheme: dark;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f4f1ea;
+      --bg-surface: #eae6dc;
+      --bg-node: #e0dbd0;
+      --text: #2a2a32;
+      --text-muted: #6e6e80;
+      --gold: #a07c28;
+      --gold-dim: rgba(160, 124, 40, 0.08);
+      --gold-line: rgba(160, 124, 40, 0.2);
+      --delegation: #2e7a87;
+      --delegation-dim: rgba(46, 122, 135, 0.08);
+      --description: #6b4a9e;
+      --description-dim: rgba(107, 74, 158, 0.08);
+      --discernment: #a8503c;
+      --discernment-dim: rgba(168, 80, 60, 0.08);
+      --diligence: #3a8a50;
+      --diligence-dim: rgba(58, 138, 80, 0.08);
+      --pillar-effective: #4a7eb0;
+      --pillar-efficient: #a07c28;
+      --pillar-ethical: #7a50a8;
+      --pillar-safe: #3a8a50;
+      color-scheme: light;
+    }
+  }
+
+  :root[data-theme="light"] {
+    --bg: #f4f1ea;
+    --bg-surface: #eae6dc;
+    --bg-node: #e0dbd0;
+    --text: #2a2a32;
+    --text-muted: #6e6e80;
+    --gold: #a07c28;
+    --gold-dim: rgba(160, 124, 40, 0.08);
+    --gold-line: rgba(160, 124, 40, 0.2);
+    --delegation: #2e7a87;
+    --delegation-dim: rgba(46, 122, 135, 0.08);
+    --description: #6b4a9e;
+    --description-dim: rgba(107, 74, 158, 0.08);
+    --discernment: #a8503c;
+    --discernment-dim: rgba(168, 80, 60, 0.08);
+    --diligence: #3a8a50;
+    --diligence-dim: rgba(58, 138, 80, 0.08);
+    --pillar-effective: #4a7eb0;
+    --pillar-efficient: #a07c28;
+    --pillar-ethical: #7a50a8;
+    --pillar-safe: #3a8a50;
+    color-scheme: light;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Space+Mono:wght@400;700&display=swap');
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    margin: 0;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-block: 48px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .header .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold-line);
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 3px;
+    margin-bottom: 14px;
+  }
+
+  .header h1 {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+    font-weight: 700;
+    color: var(--gold);
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  .header p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Foundation pillars */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+
+  @media (max-width: 600px) {
+    .pillars { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .pillar {
+    text-align: center;
+    padding: 14px 10px;
+    border-radius: 4px;
+    background: var(--bg-surface);
+    border-bottom: 3px solid transparent;
+  }
+
+  .pillar .pillar-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .pillar .pillar-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .pillar.effective { border-bottom-color: var(--pillar-effective); }
+  .pillar.effective .pillar-name { color: var(--pillar-effective); }
+  .pillar.efficient { border-bottom-color: var(--pillar-efficient); }
+  .pillar.efficient .pillar-name { color: var(--pillar-efficient); }
+  .pillar.ethical { border-bottom-color: var(--pillar-ethical); }
+  .pillar.ethical .pillar-name { color: var(--pillar-ethical); }
+  .pillar.safe { border-bottom-color: var(--pillar-safe); }
+  .pillar.safe .pillar-name { color: var(--pillar-safe); }
+
+  .pillars-caption {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+    margin-bottom: 36px;
+    font-style: italic;
+  }
+
+  /* 4D Core */
+  .core-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .core-hub {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    background: var(--gold-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0 0 60px var(--gold-dim), 0 0 120px rgba(212, 168, 67, 0.04);
+  }
+
+  .core-hub .core-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .core-hub .core-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .core-subtitle {
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+    margin-bottom: 40px;
+  }
+
+  /* 4D Quadrants */
+  .quadrants {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  @media (max-width: 700px) {
+    .quadrants { grid-template-columns: 1fr; }
+  }
+
+  .quadrant {
+    border-radius: 6px;
+    padding: 20px;
+    border: 1px solid transparent;
+  }
+
+  .quadrant.delegation {
+    background: var(--delegation-dim);
+    border-color: var(--delegation);
+  }
+  .quadrant.description {
+    background: var(--description-dim);
+    border-color: var(--description);
+  }
+  .quadrant.discernment {
+    background: var(--discernment-dim);
+    border-color: var(--discernment);
+  }
+  .quadrant.diligence {
+    background: var(--diligence-dim);
+    border-color: var(--diligence);
+  }
+
+  .quadrant .q-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .quadrant .q-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--bg);
+    flex-shrink: 0;
+  }
+
+  .delegation .q-icon { background: var(--delegation); }
+  .description .q-icon { background: var(--description); }
+  .discernment .q-icon { background: var(--discernment); }
+  .diligence .q-icon { background: var(--diligence); }
+
+  .quadrant .q-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  .delegation .q-title { color: var(--delegation); }
+  .description .q-title { color: var(--description); }
+  .discernment .q-title { color: var(--discernment); }
+  .diligence .q-title { color: var(--diligence); }
+
+  .quadrant .q-question {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  .quadrant .q-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    margin-top: 12px;
+  }
+
+  .quadrant .q-sub:first-of-type {
+    margin-top: 0;
+  }
+
+  .branch {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .branch-item {
+    background: var(--bg-node);
+    border-radius: 3px;
+    padding: 7px 11px;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+  }
+
+  .branch-item .source {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    padding: 1px 5px;
+    border-radius: 2px;
+    font-weight: 700;
+  }
+
+  .source.af {
+    color: var(--delegation);
+    border: 1px solid var(--delegation);
+  }
+
+  .source.c1 {
+    color: var(--discernment);
+    border: 1px solid var(--discernment);
+  }
+
+  .source.real {
+    color: var(--gold);
+    border: 1px solid var(--gold);
+  }
+
+  /* Serves pillars tags */
+  .serves {
+    display: flex;
+    gap: 6px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+
+  .serves-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 2px;
+    border: 1px solid var(--gold-line);
+    color: var(--text-muted);
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    border-top: 1px solid var(--gold-line);
+    padding-top: 28px;
+    margin-top: 12px;
+  }
+
+  .footer p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin: 0 0 6px;
+    line-height: 1.5;
+  }
+
+  .footer .hint {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 16px;
+  }
+</style>
+
+<div class="page">
+  <div class="header">
+    <div class="tag">CCAF Mental Model</div>
+    <h1>Everything Leads to the 4D Framework</h1>
+    <p>Two courses, one operating system. Every topic maps back to four competencies.</p>
+  </div>
+
+  <!-- Foundation Pillars -->
+  <div class="pillars">
+    <div class="pillar effective">
+      <div class="pillar-label">Goal</div>
+      <div class="pillar-name">Effective</div>
+    </div>
+    <div class="pillar efficient">
+      <div class="pillar-label">Goal</div>
+      <div class="pillar-name">Efficient</div>
+    </div>
+    <div class="pillar ethical">
+      <div class="pillar-label">Goal</div>
+      <div class="pillar-name">Ethical</div>
+    </div>
+    <div class="pillar safe">
+      <div class="pillar-label">Goal</div>
+      <div class="pillar-name">Safe</div>
+    </div>
+  </div>
+  <div class="pillars-caption">AI Fluency: the ability to collaborate with AI in ways that are effective, efficient, ethical, and safe</div>
+
+  <!-- 4D Core -->
+  <div class="core-section">
+    <div class="core-hub">
+      <div class="core-label">City Center</div>
+      <div class="core-title">4D</div>
+    </div>
+  </div>
+  <div class="core-subtitle">The operating system that serves all four goals</div>
+
+  <!-- Quadrants -->
+  <div class="quadrants">
+
+    <!-- Delegation -->
+    <div class="quadrant delegation">
+      <div class="q-header">
+        <div class="q-icon">D1</div>
+        <div class="q-title">Delegation</div>
+      </div>
+      <div class="q-question">What work should I do vs. what should AI do?</div>
+
+      <div class="q-sub">AI Foundations</div>
+      <div class="branch">
+        <div class="branch-item"><span class="source af">AF</span> Problem Awareness — understand goals before involving AI</div>
+        <div class="branch-item"><span class="source af">AF</span> Platform Awareness — know what AI can and can't do</div>
+        <div class="branch-item"><span class="source af">AF</span> Task Delegation — distribute work to play to strengths</div>
+      </div>
+
+      <div class="q-sub">Claude 101</div>
+      <div class="branch">
+        <div class="branch-item"><span class="source c1">C1</span> Chat / Cowork / Code — choosing the right mode for the task</div>
+        <div class="branch-item"><span class="source c1">C1</span> Connectors — multiplies what you can delegate</div>
+        <div class="branch-item"><span class="source c1">C1</span> Research Mode — delegate entire investigations</div>
+        <div class="branch-item"><span class="source c1">C1</span> Use Cases by Role — breadth of what's delegatable</div>
+        <div class="branch-item"><span class="source c1">C1</span> Claude Everywhere — seven surfaces, one intelligence</div>
+      </div>
+
+      <div class="q-sub">Real Experience</div>
+      <div class="branch">
+        <div class="branch-item"><span class="source real">EXP</span> Delegated entire thinking process instead of owning analysis</div>
+      </div>
+
+      <div class="serves">
+        <span class="serves-tag">Effective</span>
+        <span class="serves-tag">Efficient</span>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="quadrant description">
+      <div class="q-header">
+        <div class="q-icon">D2</div>
+        <div class="q-title">Description</div>
+      </div>
+      <div class="q-question">How do I communicate clearly with AI?</div>
+
+      <div class="q-sub">AI Foundations</div>
+      <div class="branch">
+        <div class="branch-item"><span class="source af">AF</span> Product Description — define what you want</div>
+        <div class="branch-item"><span class="source af">AF</span> Process Description — guide how AI approaches it</div>
+        <div class="branch-item"><span class="source af">AF</span> Performance Description — set interaction style</div>
+        <div class="branch-item"><span class="source af">AF</span> 6 Prompting Techniques — context, examples, constraints, steps, think first, role</div>
+      </div>
+
+      <div class="q-sub">Claude 101</div>
+      <div class="branch">
+        <div class="branch-item"><span class="source c1">C1</span> Prompt Structure — setting the stage, defining the task, specifying rules</div>
+        <div class="branch-item"><span class="source c1">C1</span> Memory and Styles — persistent user-level Description</div>
+        <div class="branch-item"><span class="source c1">C1</span> Projects — persistent work-stream-level Description</div>
+        <div class="branch-item"><span class="source c1">C1</span> Skills — codified methodology-level Description</div>
+        <div class="branch-item"><span class="source c1">C1</span> Artifacts — Description shapes the output format</div>
+        <div class="branch-item"><span class="source c1">C1</span> Common Challenges — most problems are Description gaps</div>
+      </div>
+
+      <div class="q-sub">Real Experience</div>
+      <div class="branch">
+        <div class="branch-item"><span class="source real">EXP</span> Lacked Platform Awareness; AI couldn't focus on the right files</div>
+      </div>
+
+      <div class="serves">
+        <span class="serves-tag">Effective</span>
+        <span class="serves-tag">Efficient</span>
+      </div>
+    </div>
+
+    <!-- Discernment -->
+    <div class="quadrant discernment">
+      <div class="q-header">
+        <div class="q-icon">D3</div>
+        <div class="q-title">Discernment</div>
+      </div>
+      <div class="q-question">Is what AI produced actually good?</div>
+
+      <div class="q-sub">AI Foundations</div>
+      <div class="branch">
+        <div class="branch-item"><span class="source af">AF</span> Product Discernment — is it accurate and relevant?</div>
+        <div class="branch-item"><span class="source af">AF</span> Process Discernment — did AI approach it the right way?</div>
+        <div class="branch-item"><span class="source af">AF</span> Performance Discernment — was the interaction effective?</div>
+        <div class="branch-item"><span class="source af">AF</span> Description-Discernment Loop — describe, evaluate, refine, integrate</div>
+      </div>
+
+      <div class="q-sub">Claude 101</div>
+      <div class="branch">
+        <div class="branch-item"><span class="source c1">C1</span> Iteration Mindset — first response is a starting point</div>
+        <div class="branch-item"><span class="source c1">C1</span> Evals — systematic Discernment for recurring tasks</div>
+        <div class="branch-item"><span class="source c1">C1</span> Hallucination — the one challenge that isn't a Description fix</div>
+        <div class="branch-item"><span class="source c1">C1</span> Research Output — more delegation requires harder discernment</div>
+      </div>
+
+      <div class="q-sub">Real Experience</div>
+      <div class="branch">
+        <div class="branch-item"><span class="source real">EXP</span> Blindly accepted AI-generated plans without evaluating them</div>
+      </div>
+
+      <div class="serves">
+        <span class="serves-tag">Effective</span>
+        <span class="serves-tag">Safe</span>
+      </div>
+    </div>
+
+    <!-- Diligence -->
+    <div class="quadrant diligence">
+      <div class="q-header">
+        <div class="q-icon">D4</div>
+        <div class="q-title">Diligence</div>
+      </div>
+      <div class="q-question">Am I using AI responsibly?</div>
+
+      <div class="q-sub">AI Foundations</div>
+      <div class="branch">
+        <div class="branch-item"><span class="source af">AF</span> Creation Diligence — is this the right tool for this task?</div>
+        <div class="branch-item"><span class="source af">AF</span> Transparency Diligence — who needs to know AI was involved?</div>
+        <div class="branch-item"><span class="source af">AF</span> Deployment Diligence — have I verified what I'm sharing?</div>
+      </div>
+
+      <div class="q-sub">Claude 101</div>
+      <div class="branch">
+        <div class="branch-item"><span class="source c1">C1</span> Connectors & Permissions — more access, more responsibility</div>
+        <div class="branch-item"><span class="source c1">C1</span> Chrome Guardrails — built-in safety for high-risk actions</div>
+        <div class="branch-item"><span class="source c1">C1</span> Skills Security — only install from trusted sources</div>
+        <div class="branch-item"><span class="source c1">C1</span> Enterprise Search — scoped access, revocable, private</div>
+      </div>
+
+      <div class="q-sub">Real Experience</div>
+      <div class="branch">
+        <div class="branch-item"><span class="source real">EXP</span> Accountable for output and data safety regardless of AI involvement</div>
+      </div>
+
+      <div class="serves">
+        <span class="serves-tag">Ethical</span>
+        <span class="serves-tag">Safe</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>The 4D Framework isn't a course topic. It's the operating system underneath every AI tool and feature.</p>
+    <p>The tools will keep changing. The framework stays.</p>
+    <div class="hint">Map is expanding. More territory to unlock.</div>
+  </div>
+</div>
