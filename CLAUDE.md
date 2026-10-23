@@ -39,8 +39,8 @@ For ~1 year, Dinesh had unrestricted access to AI models at work. Then guardrail
 - Journal: `journal/2026-10-18-claude-101-learning.md`
 - LinkedIn post: pending
 
-### Claude Code 101 (not started yet)
-- Next in the learning path
+### Claude Code 101 (in progress — started 2026-10-23)
+- Next course after Claude 101
 
 ## ClaudePort City (Planned — Do Not Build Yet)
 
